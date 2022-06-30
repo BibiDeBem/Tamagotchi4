@@ -103,18 +103,18 @@ public class Tamagotchi4 implements Runnable {
     public static void main(String[] args) throws IOException {
         Tamagotchi4 game = new Tamagotchi4();
 
-        character = ImageIO.read(Tamagotchi4.class.getResource("/images/Normal.png"));
-        characterB = ImageIO.read(Tamagotchi4.class.getResource("/images/Piscando.png"));
-        characterS = ImageIO.read(Tamagotchi4.class.getResource("/images/Triste.png"));
-        characterM = ImageIO.read(Tamagotchi4.class.getResource("/images/demoSeeRigth.png"));
-        food = ImageIO.read(Tamagotchi4.class.getResource("/images/Comida.png"));
+        character = ImageIO.read(Tamagotchi4.class.getResource("/images/normal.png"));
+        characterB = ImageIO.read(Tamagotchi4.class.getResource("/images/piscando.png"));
+        characterS = ImageIO.read(Tamagotchi4.class.getResource("/images/triste.png"));
+        characterM = ImageIO.read(Tamagotchi4.class.getResource("/images/bocaAbertaBrincando.png"));
+        food = ImageIO.read(Tamagotchi4.class.getResource("/images/comida.png"));
         bed = ImageIO.read(Tamagotchi4.class.getResource("/images/cama.png"));
-        shower = ImageIO.read(Tamagotchi4.class.getResource("/images/chuveiro.png"));
-        smiley = ImageIO.read(Tamagotchi4.class.getResource("/images/demoSeak.png"));
-        ball = ImageIO.read(Tamagotchi4.class.getResource("/images/Bola.png"));
-        fly = ImageIO.read(Tamagotchi4.class.getResource("/images/Remedio.png"));
+        shower = ImageIO.read(Tamagotchi4.class.getResource("/images/banho.png"));
+        smiley = ImageIO.read(Tamagotchi4.class.getResource("/images/bocaAberta.png"));
+        ball = ImageIO.read(Tamagotchi4.class.getResource("/images/bola.png"));
+        fly = ImageIO.read(Tamagotchi4.class.getResource("/images/sujoFrame1.png"));
         
-        String path = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "NetBeansProjects" + File.separator + "Tamagotchi4" + File.separator + "Tamagotchi_XD" + File.separator + "Save";  
+        String path = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "Tamagotchi Save File";  
         File customDir = new File(path);
         if (customDir.exists()) {
             System.out.println("save file exists");
@@ -124,7 +124,7 @@ public class Tamagotchi4 implements Runnable {
             System.out.println("save file exists");
             newSave(path);
         } else {
-            System.out.println("error finding or make save");
+            System.out.println("error finding or creating save");
         }
         loc = path;
         game.createDisplay();
@@ -232,8 +232,8 @@ public class Tamagotchi4 implements Runnable {
         }
         Color backgroud = new Color(2, 190, tmp);
 
-        x = Width / 2 - (character.getWidth() * scale) / 2;
-        y = Height / 2 - (character.getHeight() * scale) / 2;
+        x = Width / 2 - (character.getWidth() * scale/2) / 2;
+        y = Height / 2 - (character.getHeight() * scale/2) / 2;
         cham = new Rectangle(x, y, character.getWidth() * scale, character.getHeight() * scale);
         bs = canvas.getBufferStrategy();
         if (bs == null) {
@@ -247,7 +247,7 @@ public class Tamagotchi4 implements Runnable {
         //fundo
         g.setColor(backgroud);
         g.fillRect(0, 0, Width, Height);
-        g.setFont(new Font("Ariel", Font.BOLD, 25));
+        g.setFont(new Font("Arial", Font.BOLD, 25));
 
         //PAGINA DE LOADING___________________________________________________________________________
         if (loading == true) {
@@ -281,9 +281,9 @@ public class Tamagotchi4 implements Runnable {
                 g.setColor(Color.yellow);
                 g.fillRect(150, 150, 400, 400);
                 g.setColor(Color.black);
-                g.drawString("Enter a name: " + name, 200, 200);
-                g.setFont(new Font("Ariel", Font.BOLD, 18));
-                g.drawString("(10 charactere max )", 275, 230);
+                g.drawString("Insert a name:  " + name, 200, 200);
+                g.setFont(new Font("Arial", Font.BOLD, 18));
+                g.drawString("(10 characters max)", 275, 230);
                 g.drawString("Press enter to continue.", 255, 260);
                 g.drawRect(375, 180, 160, 25);
             // BOTÃO DE AJUDA__________________________________________________________________________
@@ -292,7 +292,7 @@ public class Tamagotchi4 implements Runnable {
                 g.setColor(new Color(255, 100, 0));
                 g.fillRect(Width / 2 - 95, Height / 12 * 11 + 5, 190, 40);
                 g.setColor(Color.black);
-                g.setFont(new Font("Ariel", Font.BOLD, 25));
+                g.setFont(new Font("Arial", Font.BOLD, 25));
                 g.drawString("HELP!", Width / 2 - 30, Height / 12 * 11 + 33);
                 if (onScreen() == true) {
                     if (menuHelp.contains(frame.getMousePosition()) && left == true) {
@@ -302,7 +302,7 @@ public class Tamagotchi4 implements Runnable {
             }
             // JOGO PRINCIPAL___________________________________________________________________________
             if (menu == false && pause == false) {
-                g.setFont(new Font("Ariel", Font.BOLD, 25));
+                g.setFont(new Font("Arial", Font.BOLD, 25));
                 g.setColor(Color.black);
                 if (blink == true || sleep == true) {
                     g.drawString(name, cham.x + cham.width / 2 , cham.y - 10);
@@ -351,7 +351,7 @@ public class Tamagotchi4 implements Runnable {
                 g.fillRoundRect(0, Height / 4 * 3, Width, Height / 4 * 3, 50, 50);
 
                 g.setColor(Color.red);
-                g.drawImage(fly, boxOne.x, boxOne.y, boxOne.width, boxOne.height, null);
+                g.drawImage(food, boxOne.x, boxOne.y, boxOne.width, boxOne.height, null);
                 g.drawImage(ball, boxTwo.x, boxTwo.y, boxTwo.width, boxTwo.height, null);
                 g.drawImage(shower, boxThree.x, boxThree.y, boxThree.width, boxThree.height, null);
                 g.drawImage(bed, boxFour.x, boxFour.y, boxFour.width, boxFour.height, null);
@@ -418,7 +418,7 @@ public class Tamagotchi4 implements Runnable {
                 g.fillRect(Width / 2 - 100, Height / 12, 200, 50); // localização e dimensão do retangulo vermelho maior do botão
                 g.setColor(new Color(255, 100, 0));
                 g.fillRect(Width / 2 - 95, Height / 12 + 5, 190, 40);  // localização e dimensão do retangulo laranja menor do botão
-                g.setFont(new Font("Ariel", Font.BOLD, 25)); // dimensão do texto
+                g.setFont(new Font("Arial", Font.BOLD, 25)); // dimensão do texto
                 g.setColor(Color.black);
                 g.drawString("Resume", Width / 2 - 50, Height / 12 + 35);// localização do texto
                 if (onScreen()) {
@@ -432,7 +432,7 @@ public class Tamagotchi4 implements Runnable {
                 g.fillRect(Width / 2 - 100, Height / 12 * 3, 200, 50);// localização e dimensão do retangulo vermelho maior do botão
                 g.setColor(new Color(255, 100, 0));
                 g.fillRect(Width / 2 - 95, Height / 12 * 3 + 5, 190, 40);// localização e dimensão do retangulo laranja menor do botão
-                g.setFont(new Font("Ariel", Font.BOLD, 25));// dimensão do texto
+                g.setFont(new Font("Arial", Font.BOLD, 25));// dimensão do texto
                 g.setColor(Color.black);
                 g.drawString("Help", Width / 2 - 30, Height / 12 * 3 + 35);// localização do texto
                 if (onScreen()) {
@@ -445,7 +445,7 @@ public class Tamagotchi4 implements Runnable {
                 g.fillRect(Width / 2 - 100, Height / 12 * 5, 200, 50);// localização e dimensão do retangulo vermelho maior do botão
                 g.setColor(new Color(255, 100, 0));
                 g.fillRect(Width / 2 - 95, Height / 12 * 5 + 5, 190, 40);// localização e dimensão do retangulo laranja menor do botão
-                g.setFont(new Font("Ariel", Font.BOLD, 25));// dimensão do texto
+                g.setFont(new Font("Arial", Font.BOLD, 25));// dimensão do texto
                 g.setColor(Color.black);
                 g.drawString("Reset", Width / 2 - 30, Height / 12 * 5 + 35);// localização do texto
                 if (onScreen()) {
@@ -487,7 +487,7 @@ public class Tamagotchi4 implements Runnable {
                 g.fillRect(Width / 2 - 100, Height / 8 * 7, 200, 50);// localização e dimensão do retangulo vermelho maior do botão
                 g.setColor(new Color(255, 100, 0));
                 g.fillRect(Width / 2 - 95, Height / 8 * 7 + 5, 190, 40);// localização e dimensão do retangulo laranja menor do botão
-                g.setFont(new Font("Ariel", Font.BOLD, 25));// dimensão do texto
+                g.setFont(new Font("Arial", Font.BOLD, 25));// dimensão do texto
                 g.setColor(Color.black);
                 g.drawString("Exit", Width / 2 - 25, Height / 8 * 7 + 35);// localização do texto
                 if (onScreen()) {
@@ -507,11 +507,11 @@ public class Tamagotchi4 implements Runnable {
                 g.setColor(Color.black);
                 g.drawString("BACK", 110, Height / 8 * 7 + 35);
 
-                g.drawString("The game is simple, keep your little friend alive!", 40, 50);
-                g.drawString("Keep him fed, happy, vlean and well rested by dragging. ", 40, 80);
-                g.drawString("The objects from the bottom of your screen onto him!", 40, 110);
-                g.drawString("The game auto saves but you can quit anytime with the ", 40, 140);
-                g.drawString("exit button in the pause menu.", 40, 170);
+                g.drawString("The game is simple: Keep your little friend alive!", 40, 50);
+                g.drawString("Keep it fed, happy, clean and well-rested by clicking", 40, 80);
+                g.drawString("the icons at the bottom of the screen.", 40, 110);
+                g.drawString("This game will save your progress automatically.", 40, 140);
+                g.drawString("You can leave anytime using the EXIT button in the pause menu.", 40, 170);
                 g.drawString("ENJOY!", 40, 200);
 
                 if (onScreen() == true) {
