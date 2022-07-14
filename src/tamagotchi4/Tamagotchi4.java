@@ -103,7 +103,7 @@ public class Tamagotchi4 implements Runnable {
     public static void main(String[] args) throws IOException {
         Tamagotchi4 game = new Tamagotchi4();
 
-        character = ImageIO.read(Tamagotchi4.class.getResource("/images/normal.png"));
+        character = ImageIO.read(Tamagotchi4.class.getResource("/images/v1.png"));
         characterB = ImageIO.read(Tamagotchi4.class.getResource("/images/piscando.png"));
         characterS = ImageIO.read(Tamagotchi4.class.getResource("/images/triste.png"));
         characterM = ImageIO.read(Tamagotchi4.class.getResource("/images/bocaAbertaBrincando.png"));
